@@ -35,6 +35,13 @@ class Signup extends StatelessWidget {
     return null;
   }
 
+  String? _validateUsername(value) {
+    if (value!.isEmpty) {
+      return 'Please enter  username';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,23 +55,20 @@ class Signup extends StatelessWidget {
               child: Column(
                 children: [
                   TextFormField(
+                    keyboardType: TextInputType.name,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
                       labelText: 'Username',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0)),
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter username';
-                      }
-                      return null;
-                    },
+                    validator: _validateUsername,
                   ),
                   const SizedBox(
                     height: 16.0,
                   ),
                   TextFormField(
+                    keyboardType: TextInputType.emailAddress,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
                         labelText: 'Email',
@@ -76,6 +80,7 @@ class Signup extends StatelessWidget {
                     height: 16.0,
                   ),
                   TextFormField(
+                    keyboardType: TextInputType.phone,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
                         labelText: 'Phone no',
