@@ -42,6 +42,13 @@ class Signup extends StatelessWidget {
     return null;
   }
 
+  String? _validatePassword(value) {
+    if (value!.isEmpty) {
+      return 'Please enter  password';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,11 +64,7 @@ class Signup extends StatelessWidget {
                   TextFormField(
                     keyboardType: TextInputType.name,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: InputDecoration(
-                      labelText: 'Username',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0)),
-                    ),
+                    decoration: _buildinputDecoration("Username", Icons.person),
                     validator: _validateUsername,
                   ),
                   const SizedBox(
@@ -70,10 +73,7 @@ class Signup extends StatelessWidget {
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: InputDecoration(
-                        labelText: 'Email',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0))),
+                    decoration: _buildinputDecoration("Email Id", Icons.email),
                     validator: _validateEmail,
                   ),
                   const SizedBox(
@@ -82,11 +82,17 @@ class Signup extends StatelessWidget {
                   TextFormField(
                     keyboardType: TextInputType.phone,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: InputDecoration(
-                        labelText: 'Phone no',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0))),
+                    decoration:
+                        _buildinputDecoration("Phone number", Icons.call),
                     validator: _validatePhone,
+                  ),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                  TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: _buildinputDecoration("Password", Icons.lock),
+                    validator: _validatePassword,
                   ),
                   const SizedBox(
                     height: 16.0,
@@ -110,5 +116,13 @@ class Signup extends StatelessWidget {
                 ],
               )),
         ));
+  }
+
+  InputDecoration _buildinputDecoration(String label, IconData suffixIcon) {
+    return InputDecoration(
+      labelText: label,
+      suffixIcon: Icon(suffixIcon),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+    );
   }
 }
