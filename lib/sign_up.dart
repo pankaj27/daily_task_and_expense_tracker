@@ -52,16 +52,30 @@ class Signup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Sign up'),
-        ),
+        backgroundColor: const Color(0xFF252634),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
               key: _formKey,
               child: Column(
                 children: [
+                  const SizedBox(
+                    height: 80.0,
+                  ),
+                  const SizedBox(
+                    width: 250,
+                    child: Text("Create new Account",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                  const SizedBox(
+                    height: 40.0,
+                  ),
                   TextFormField(
+                    style: const TextStyle(color: Colors.white),
                     keyboardType: TextInputType.name,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: _buildinputDecoration("Username", Icons.person),
@@ -71,6 +85,7 @@ class Signup extends StatelessWidget {
                     height: 16.0,
                   ),
                   TextFormField(
+                    style: const TextStyle(color: Colors.white),
                     keyboardType: TextInputType.emailAddress,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: _buildinputDecoration("Email Id", Icons.email),
@@ -80,6 +95,7 @@ class Signup extends StatelessWidget {
                     height: 16.0,
                   ),
                   TextFormField(
+                    style: const TextStyle(color: Colors.white),
                     keyboardType: TextInputType.phone,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration:
@@ -90,6 +106,7 @@ class Signup extends StatelessWidget {
                     height: 16.0,
                   ),
                   TextFormField(
+                    style: const TextStyle(color: Colors.white),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: _buildinputDecoration("Password", Icons.lock),
                     validator: _validatePassword,
@@ -103,16 +120,29 @@ class Signup extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: _submitForm,
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.purple,
+                          backgroundColor:
+                              const Color.fromARGB(255, 241, 89, 0),
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 50, vertical: 5),
                           textStyle: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold)),
-                      child: const Text('Submit',
+                      child: const Text('Create',
                           style: TextStyle(color: Colors.white)),
                     ),
                   ),
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 252, 226, 212),
+                          fontSize: 20.0),
+                    ),
+                  )
                 ],
               )),
         ));
@@ -120,8 +150,15 @@ class Signup extends StatelessWidget {
 
   InputDecoration _buildinputDecoration(String label, IconData suffixIcon) {
     return InputDecoration(
+      fillColor: const Color(0xAA494A59),
+      enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Color(0X35949494))),
+      focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Color(0X35949494))),
+      filled: true,
+      labelStyle: const TextStyle(color: Color(0xFF949494)),
       labelText: label,
-      suffixIcon: Icon(suffixIcon),
+      suffixIcon: Icon(suffixIcon, color: const Color(0xFF949494)),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
     );
   }
