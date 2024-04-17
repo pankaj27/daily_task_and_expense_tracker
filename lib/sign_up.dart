@@ -19,7 +19,44 @@ class Signup extends StatelessWidget {
                     labelText: 'Username',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0))),
-              )
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0))),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Phone no',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0))),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              SizedBox(
+                height: 50.0,
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purple,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 50, vertical: 5),
+                      textStyle: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold)),
+                  child: const Text('Submit',
+                      style: TextStyle(color: Colors.white)),
+                ),
+              ),
             ],
           )),
         ));
