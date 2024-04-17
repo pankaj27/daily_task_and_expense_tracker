@@ -6,7 +6,10 @@ class Signup extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _submitForm() {
-    if (_formKey.currentState!.validate()) {}
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(_formKey.currentContext!).showSnackBar(
+          const SnackBar(content: Text('Form submitted successfully')));
+    }
   }
 
   String? _validateEmail(value) {
