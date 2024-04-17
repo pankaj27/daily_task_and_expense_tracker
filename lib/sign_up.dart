@@ -20,6 +20,18 @@ class Signup extends StatelessWidget {
     return null;
   }
 
+  String? _validatePhone(value) {
+    RegExp phoneRegex = RegExp(r'^(\+|00)?[0-9]+$');
+    if (value!.isEmpty) {
+      return 'Please enter a phone number';
+    } else if (!phoneRegex.hasMatch(value)) {
+      return 'Please enter numeric value only';
+    } else if (value.length != 10) {
+      return 'Please enter 10 digit valid phone number';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +45,7 @@ class Signup extends StatelessWidget {
               child: Column(
                 children: [
                   TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
                       labelText: 'Username',
                       border: OutlineInputBorder(
@@ -49,6 +62,7 @@ class Signup extends StatelessWidget {
                     height: 16.0,
                   ),
                   TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
                         labelText: 'Email',
                         border: OutlineInputBorder(
@@ -59,10 +73,12 @@ class Signup extends StatelessWidget {
                     height: 16.0,
                   ),
                   TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
                         labelText: 'Phone no',
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0))),
+                    validator: _validatePhone,
                   ),
                   const SizedBox(
                     height: 16.0,
