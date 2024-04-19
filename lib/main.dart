@@ -1,7 +1,13 @@
-import 'package:daily_task_and_expense_tracker/sign_up.dart';
+import 'package:daily_task_and_expense_tracker/screens/sign_up.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+Future<void> main() async {
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(const MyApp());
 }
 

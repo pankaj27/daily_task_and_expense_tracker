@@ -1,7 +1,8 @@
+import 'package:daily_task_and_expense_tracker/screens/sign_up.dart';
+import 'package:daily_task_and_expense_tracker/utils/appvalidator.dart';
 import 'package:flutter/material.dart';
-
-class Signup extends StatelessWidget {
-  Signup({super.key});
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -12,42 +13,7 @@ class Signup extends StatelessWidget {
     }
   }
 
-  String? _validateEmail(value) {
-    if (value!.isEmpty) {
-      return 'Please enter email';
-    }
-    RegExp emailRegexp = RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
-    if (!emailRegexp.hasMatch(value)) {
-      return 'Please enter valid email';
-    }
-    return null;
-  }
-
-  String? _validatePhone(value) {
-    RegExp phoneRegex = RegExp(r'^(\+|00)?[0-9]+$');
-    if (value!.isEmpty) {
-      return 'Please enter a phone number';
-    } else if (!phoneRegex.hasMatch(value)) {
-      return 'Please enter numeric value only';
-    } else if (value.length != 10) {
-      return 'Please enter 10 digit valid phone number';
-    }
-    return null;
-  }
-
-  String? _validateUsername(value) {
-    if (value!.isEmpty) {
-      return 'Please enter  username';
-    }
-    return null;
-  }
-
-  String? _validatePassword(value) {
-    if (value!.isEmpty) {
-      return 'Please enter  password';
-    }
-    return null;
-  }
+  var appValidator = AppValidator();
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +30,7 @@ class Signup extends StatelessWidget {
                   ),
                   const SizedBox(
                     width: 250,
-                    child: Text("Create new Account",
+                    child: Text("Login Account",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.white,
@@ -79,29 +45,13 @@ class Signup extends StatelessWidget {
                     keyboardType: TextInputType.name,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: _buildinputDecoration("Username", Icons.person),
-                    validator: _validateUsername,
+                    validator: appValidator.validateUsername,
                   ),
                   const SizedBox(
                     height: 16.0,
                   ),
-                  TextFormField(
-                    style: const TextStyle(color: Colors.white),
-                    keyboardType: TextInputType.emailAddress,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: _buildinputDecoration("Email Id", Icons.email),
-                    validator: _validateEmail,
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  TextFormField(
-                    style: const TextStyle(color: Colors.white),
-                    keyboardType: TextInputType.phone,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration:
-                        _buildinputDecoration("Phone number", Icons.call),
-                    validator: _validatePhone,
-                  ),
+                  
+                  
                   const SizedBox(
                     height: 16.0,
                   ),
@@ -109,7 +59,7 @@ class Signup extends StatelessWidget {
                     style: const TextStyle(color: Colors.white),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: _buildinputDecoration("Password", Icons.lock),
-                    validator: _validatePassword,
+                    validator: appValidator.validatePassword,
                   ),
                   const SizedBox(
                     height: 16.0,
@@ -127,7 +77,7 @@ class Signup extends StatelessWidget {
                               horizontal: 50, vertical: 5),
                           textStyle: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold)),
-                      child: const Text('Create',
+                      child: const Text('Login',
                           style: TextStyle(color: Colors.white)),
                     ),
                   ),
@@ -135,9 +85,14 @@ class Signup extends StatelessWidget {
                     height: 30.0,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Signup()),
+                      );
+                    },
                     child: const Text(
-                      'Login',
+                      'Create new account',
                       style: TextStyle(
                           color: Color.fromARGB(255, 252, 226, 212),
                           fontSize: 20.0),
