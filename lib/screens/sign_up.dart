@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:daily_task_and_expense_tracker/screens/login_screen.dart';
 import 'package:daily_task_and_expense_tracker/services/auth_service.dart';
 import 'package:daily_task_and_expense_tracker/utils/appvalidator.dart';
