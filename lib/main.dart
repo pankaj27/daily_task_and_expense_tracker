@@ -1,4 +1,5 @@
 import 'package:daily_task_and_expense_tracker/screens/sign_up.dart';
+import 'package:daily_task_and_expense_tracker/widgets/auth_gate.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -18,14 +19,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Expense Tracker',
       // theme: ThemeData(
       //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       //   useMaterial3: true,
       // ),
       debugShowCheckedModeBanner: false,
-      home: Signup(),
+      home: AuthGate(),
     );
   }
 }
