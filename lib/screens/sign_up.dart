@@ -1,4 +1,5 @@
 import 'package:daily_task_and_expense_tracker/screens/login_screen.dart';
+
 import 'package:daily_task_and_expense_tracker/services/auth_service.dart';
 import 'package:daily_task_and_expense_tracker/utils/appvalidator.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class _SignupState extends State<Signup> {
       };
       await authService.createUser(data, context);
 
+      
       setState((){
         isLoader =false;
       });

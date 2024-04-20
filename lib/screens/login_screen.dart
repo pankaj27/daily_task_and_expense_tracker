@@ -1,4 +1,5 @@
 import 'package:daily_task_and_expense_tracker/screens/sign_up.dart';
+import 'package:daily_task_and_expense_tracker/screens/dashboard_screen.dart';
 import 'package:daily_task_and_expense_tracker/utils/appvalidator.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen>{
       };
 
       await authService.login(data, context);
-
+      
       setState((){
         isLoader =false;
       });

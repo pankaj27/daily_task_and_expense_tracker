@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:daily_task_and_expense_tracker/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
 class AuthServices{
@@ -10,6 +11,14 @@ class AuthServices{
         email: data['email'],
         password: data['password'],
       );
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const DashboardScreen()),
+      );
+
+
+      
     } catch (e) {
       showDialog(context: context, builder: (context){
           return AlertDialog(
@@ -26,6 +35,12 @@ class AuthServices{
           email: data['email'],
           password: data['password']
       );
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => DashboardScreen()),
+      );
+
     }catch (e) {
       showDialog(context: context, builder: (context){
         return AlertDialog(
