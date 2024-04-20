@@ -1,15 +1,44 @@
 import 'package:daily_task_and_expense_tracker/screens/sign_up.dart';
 import 'package:daily_task_and_expense_tracker/utils/appvalidator.dart';
 import 'package:flutter/material.dart';
-class LoginScreen extends StatelessWidget {
+
+import '../services/auth_service.dart';
+class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
-  void _submitForm() {
+class _LoginScreenState extends State<LoginScreen>{
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  var authService = AuthServices();
+  var isLoader = false ;
+
+  Future<void> _loginsubmitForm() async {
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(_formKey.currentContext!).showSnackBar(
-          const SnackBar(content: Text('Form submitted successfully')));
+      // ScaffoldMessenger.of(_formKey.currentContext!).showSnackBar(
+      //     const SnackBar(content: Text('Form submitted successfully')));
+
+      setState((){
+        isLoader =true;
+      });
+
+      var data = {
+        "email" : _emailController.text,
+        "password":_passwordController.text
+      };
+
+      await authService.login(data, context);
+
+      setState((){
+        isLoader =false;
+      });
+
+
     }
   }
 
@@ -19,7 +48,8 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xFF252634),
-        body: Padding(
+        body: SingleChildScrollView(
+            child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
               key: _formKey,
@@ -41,11 +71,12 @@ class LoginScreen extends StatelessWidget {
                     height: 40.0,
                   ),
                   TextFormField(
+                    controller: _emailController,
                     style: const TextStyle(color: Colors.white),
-                    keyboardType: TextInputType.name,
+                    keyboardType: TextInputType.emailAddress,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: _buildinputDecoration("Username", Icons.person),
-                    validator: appValidator.validateUsername,
+                    decoration: _buildinputDecoration("Email", Icons.person),
+                    validator: appValidator.validateEmail,
                   ),
                   const SizedBox(
                     height: 16.0,
@@ -56,6 +87,7 @@ class LoginScreen extends StatelessWidget {
                     height: 16.0,
                   ),
                   TextFormField(
+                    controller: _passwordController,
                     style: const TextStyle(color: Colors.white),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: _buildinputDecoration("Password", Icons.lock),
@@ -68,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                     height: 50.0,
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: _submitForm,
+
                       style: ElevatedButton.styleFrom(
                           backgroundColor:
                               const Color.fromARGB(255, 241, 89, 0),
@@ -77,7 +109,10 @@ class LoginScreen extends StatelessWidget {
                               horizontal: 50, vertical: 5),
                           textStyle: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold)),
-                      child: const Text('Login',
+                      onPressed: (){
+                        isLoader? print("Loading") : _loginsubmitForm() ;
+                      },
+                      child: isLoader? const Center(child: CircularProgressIndicator()) : const Text('Login',
                           style: TextStyle(color: Colors.white)),
                     ),
                   ),
@@ -100,7 +135,7 @@ class LoginScreen extends StatelessWidget {
                   )
                 ],
               )),
-        ));
+        )));
   }
 
   InputDecoration _buildinputDecoration(String label, IconData suffixIcon) {
@@ -117,4 +152,6 @@ class LoginScreen extends StatelessWidget {
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
     );
   }
+
+
 }

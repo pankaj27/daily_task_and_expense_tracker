@@ -50,8 +50,10 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xFF252634),
-        body: Padding(
+        body: SingleChildScrollView(
+            child:Padding(
           padding: const EdgeInsets.all(16.0),
+
           child: Form(
               key: _formKey,
               child: Column(
@@ -155,7 +157,8 @@ class _SignupState extends State<Signup> {
                   )
                 ],
               )),
-        ));
+        ))
+    );
   }
 
   InputDecoration _buildinputDecoration(String label, IconData suffixIcon) {
